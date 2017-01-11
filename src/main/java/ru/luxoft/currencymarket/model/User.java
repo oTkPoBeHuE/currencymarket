@@ -5,27 +5,32 @@ package ru.luxoft.currencymarket.model;
 //import java.util.ArrayList;
 //import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by xxoTk on 009 09.01.17.
  */
 @Entity
-public class User {
+@Table(name="APP_USER")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-   // @Column(unique = true)
-    private String name;
+    @NotEmpty
+    @Column(name="NAME", nullable=false)
+    private String name; //todo rename to login
 
+    @NotEmpty
+    @Column(name="PASSWORD", nullable=false)
     private String password;
 
 
-//    //// TODO: 009 01.01.17 поменять на FetchType.LAZY
+//    //// TODO: 009 01.01.17  maybe change to FetchType.LAZY
+      // TODO: 009 06.01.17 @JoinTable ??
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    private List<CurrencyAccount> accounts = new ArrayList<>();
 
