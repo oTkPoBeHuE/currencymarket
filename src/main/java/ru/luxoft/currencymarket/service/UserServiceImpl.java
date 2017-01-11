@@ -12,9 +12,11 @@ import java.util.List;
 /**
  * Created by xxoTk on 011 11.01.17.
  */
+
+
 @Service("userService")
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao dao;
@@ -26,10 +28,6 @@ public class UserServiceImpl {
         return dao.findById(id);
     }
 
-    public User findBySSO(String sso) {
-        User user = dao.findBySSO(sso);
-        return user;
-    }
 
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -53,16 +51,11 @@ public class UserServiceImpl {
     }
 
 
-    public void deleteUserBySSO(String sso) {
-        dao.deleteBySSO(sso);
+    public void deleteUserById(int id) {
+        dao.deleteById(id);
     }
 
     public List<User> findAllUsers() {
         return dao.findAllUsers();
-    }
-
-    public boolean isUserSSOUnique(Integer id, String sso) {
-        User user = findBySSO(sso);
-        return ( user == null || ((id != null) && (user.getId() == id)));
     }
 }

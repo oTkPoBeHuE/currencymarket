@@ -26,10 +26,10 @@
 //
 //    @Test
 //    public void sampleTestCase() {
-//        User dave = new User("Dave", "Mathews");
+//        User dave = new User("Dave", "124");
 //        dave = repository.save(dave);
 //
-//        User carter = new User("Carter", "Beauford");
+//        User carter = new User("Carter", "1245");
 //        carter = repository.save(carter);
 //
 ////        List<User> users = (List<User>) repository.findAll();
