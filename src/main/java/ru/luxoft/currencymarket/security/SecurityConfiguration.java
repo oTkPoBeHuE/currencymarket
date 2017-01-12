@@ -37,13 +37,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //todo testing
-        http.authorizeRequests().and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/login").usernameParameter("id").passwordParameter("password").and()
-                .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
-                .tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
+//        http.authorizeRequests().and().formLogin().loginPage("/login")
+//                .loginProcessingUrl("/login").usernameParameter("id").passwordParameter("password").and()
+//                .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
+//                .tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
+
+//    defaultSuccessUrl("/", false), установка второго параметра (alwaysUse) в false говорит Spring Security
+//  что в случае успешной авторизации можно перенаправить пользователя на ту страничку, с которой он пришел на страницу аутентификации.
+
+        http.authorizeRequests()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/", false);
     }
 
     @Bean
